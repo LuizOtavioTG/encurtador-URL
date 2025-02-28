@@ -3,10 +3,11 @@ package com.example.EncurtadorURL.Service;
 import com.example.EncurtadorURL.model.Link;
 import com.example.EncurtadorURL.repository.LinkRepository;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class LinkService {
@@ -22,6 +23,11 @@ public class LinkService {
         Link link = new Link(originalUrl, UrlShortenerUtils.generateRandomUrlCode());
         linkRepository.save(link);
         return link;
+    }
+
+    public Link getOriginalUrl(String urlShort) throws Exception {
+        Optional<Link> url = linkRepository.findByUrlLong(urlShort);
+        return url.orElseThrow(() -> new NoSuchElementException("URL not found"));
     }
 
     public static class UrlShortenerUtils {
