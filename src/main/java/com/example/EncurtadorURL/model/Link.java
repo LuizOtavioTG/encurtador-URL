@@ -34,4 +34,11 @@ public class Link {
 
     private LocalDateTime expiryAt;
     private Integer views;
+
+    public Link(String urlLong, String urlShort){
+        this.urlLong = urlLong;
+        this.urlShort = urlShort;
+        this.expiryAt = LocalDateTime.now().plusDays(1);
+        this.views = 0;
+    }
 }
