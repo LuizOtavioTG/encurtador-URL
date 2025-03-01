@@ -1,4 +1,4 @@
-package com.example.EncurtadorURL.Service;
+package com.example.EncurtadorURL.service;
 
 import com.example.EncurtadorURL.model.Link;
 import com.example.EncurtadorURL.repository.LinkRepository;
@@ -19,7 +19,7 @@ public class LinkService {
     }
 
 
-    public Link shortenUrl(String originalUrl){
+    public Link createUrl(String originalUrl){
         Link link = new Link(originalUrl, UrlShortenerUtils.generateRandomUrlCode());
         linkRepository.save(link);
         return link;
