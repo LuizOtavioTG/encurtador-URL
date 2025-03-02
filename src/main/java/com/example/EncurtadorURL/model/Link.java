@@ -43,4 +43,8 @@ public class Link {
         this.expiryAt = LocalDateTime.now().plusDays(1);
         this.views = 0;
     }
+    public void incrementViews(){
+        views++;
+    }
+
 }

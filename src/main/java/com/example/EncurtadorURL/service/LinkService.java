@@ -4,6 +4,7 @@ import com.example.EncurtadorURL.model.Link;
 import com.example.EncurtadorURL.repository.LinkRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.util.NoSuchElementException;
@@ -18,7 +19,7 @@ public class LinkService {
         this.linkRepository = linkRepository;
     }
 
-
+    @Transactional
     public Link createUrl(String originalUrl){
         Link link = new Link(originalUrl, UrlShortenerUtils.generateRandomUrlCode());
         linkRepository.save(link);
@@ -29,6 +30,13 @@ public class LinkService {
         Optional<Link> url = linkRepository.findByUrlShort(urlShort);
         return url.orElseThrow(() -> new NoSuchElementException("URL not found"));
     }
+
+    @Transactional
+    public void incrementViewsAndSave (Link link){
+        link.incrementViews();
+        linkRepository.save(link);
+    }
+
 
     public static class UrlShortenerUtils {
         private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

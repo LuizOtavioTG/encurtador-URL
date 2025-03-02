@@ -40,6 +40,8 @@ public class LinkController {
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
 
+        linkService.incrementViewsAndSave(link);
+
         return ResponseEntity
                 .status(HttpStatus.PERMANENT_REDIRECT)
                 .headers(headers)
