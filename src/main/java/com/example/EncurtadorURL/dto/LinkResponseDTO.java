@@ -2,9 +2,11 @@ package com.example.EncurtadorURL.dto;
 
 import com.example.EncurtadorURL.model.Link;
 
-public record LinkResponseDTO (String link, String urlQrCode){
+import java.time.LocalDateTime;
+
+public record LinkResponseDTO (String urlLong, String urlShort, String urlQrCode, LocalDateTime expiryAt){
     public LinkResponseDTO(Link link) {
-        this(link.getUrlShort(), link.getUrlQrCode());
+        this(link.getUrlLong(),"http://localhost:8080/r/" + link.getUrlShort(), link.getUrlQrCode(), link.getExpiryAt());
     }
 }
 

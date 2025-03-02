@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class LinkService {
 
-    private LinkRepository linkRepository;
+    private final LinkRepository linkRepository;
 
     public LinkService(LinkRepository linkRepository) {
         this.linkRepository = linkRepository;
@@ -25,8 +25,8 @@ public class LinkService {
         return link;
     }
 
-    public Link getOriginalUrl(String urlShort) throws Exception {
-        Optional<Link> url = linkRepository.findByUrlLong(urlShort);
+    public Link getOriginalUrl(String urlShort) {
+        Optional<Link> url = linkRepository.findByUrlShort(urlShort);
         return url.orElseThrow(() -> new NoSuchElementException("URL not found"));
     }
 
@@ -42,7 +42,7 @@ public class LinkService {
                 int index = random.nextInt(CHARACTERS.length());
                 stringBuilder.append(CHARACTERS.charAt(index));
             }
-            return stringBuilder.toString();
+            return (stringBuilder.toString());
         }
     }
 }

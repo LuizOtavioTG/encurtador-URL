@@ -1,10 +1,10 @@
 CREATE TABLE links (
     id SERIAL PRIMARY KEY,
-    urlLong VARCHAR(1024) NOT NULL,
-    urlShort VARCHAR(255),
-    urlQrCode VARCHAR(255),
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    expiryAt TIMESTAMP,
-    views BIGINT DEFAULT 0
+    url_long VARCHAR(1024) NOT NULL,
+    url_short VARCHAR(255),
+    url_qr_code VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expiry_at TIMESTAMP,
+    views INT DEFAULT 0
 );
