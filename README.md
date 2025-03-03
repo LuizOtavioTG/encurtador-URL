@@ -1,6 +1,6 @@
 # 🔗 Encurtador de URL  
 
-Este projeto, ainda em andamento, é um encurtador de URL desenvolvido com **Java e Spring Boot**, permitindo transformar links longos em versões curtas e fáceis de compartilhar, além de uma versão **QRCode** do link. O projeto surgiu a partir de um desafio proposto pelo Backend <Brasil>. (Link do desafio: https://github.com/backend-br/desafios/blob/master/url-shortener/PROBLEM.md)
+Este projeto é um encurtador de URL desenvolvido com **Java e Spring Boot**, permitindo transformar links longos em versões curtas e fáceis de compartilhar, além de uma versão **QRCode** do link. O projeto surgiu a partir de um desafio proposto pelo Backend <Brasil>. (Link do desafio: https://github.com/backend-br/desafios/blob/master/url-shortener/PROBLEM.md)
 
 ## 🚀 Tecnologias utilizadas  
 - **Spring Boot** (para Spring Web, Spring Data JPA)  
