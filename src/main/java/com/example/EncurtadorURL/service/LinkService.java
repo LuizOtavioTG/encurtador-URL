@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -15,16 +16,27 @@ import java.util.Optional;
 public class LinkService {
 
     private final LinkRepository linkRepository;
+    private final QRCodeService qrCodeService;
     private final List<RedirectValidator> redirectValidators;
 
-    public LinkService(LinkRepository linkRepository, List<RedirectValidator> redirectValidators) {
+    public LinkService(LinkRepository linkRepository, QRCodeService qrCodeService, List<RedirectValidator> redirectValidators) {
         this.linkRepository = linkRepository;
+        this.qrCodeService = qrCodeService;
         this.redirectValidators = redirectValidators;
     }
 
     @Transactional
-    public Link createUrl(String originalUrl){
-        Link link = new Link(originalUrl, UrlShortenerUtils.generateRandomUrlCode());
+    public Link createLink(String originalUrl){
+
+        byte[] qrCodeImage = qrCodeService.generateQRCode(originalUrl);
+        if (qrCodeImage == null) {
+            throw new IllegalArgumentException("Erro ao gerar o QR code");
+        }
+        System.out.println(qrCodeImage.getClass());
+
+        Link link = new Link(originalUrl, UrlShortenerUtils.generateRandomUrlCode(), qrCodeImage);
+        System.out.println("qrCodeImage content: " + Arrays.toString(qrCodeImage));
+        System.out.println(qrCodeImage.getClass());
         linkRepository.save(link);
         return link;
     }

@@ -23,7 +23,7 @@ public class LinkController {
     @PostMapping()
     public ResponseEntity<LinkResponseDTO> createUrl(@RequestBody Map<String, String> request) {
         String originalUrl = request.get("originalUrl");
-        Link link = linkService.createUrl(originalUrl);
+        Link link = linkService.createLink(originalUrl);
         return ResponseEntity.status(HttpStatus.CREATED).body(new LinkResponseDTO(link));
     }
 
