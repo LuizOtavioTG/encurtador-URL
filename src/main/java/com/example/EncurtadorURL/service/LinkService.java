@@ -2,11 +2,12 @@ package com.example.EncurtadorURL.service;
 
 import com.example.EncurtadorURL.model.Link;
 import com.example.EncurtadorURL.repository.LinkRepository;
-
+import com.example.EncurtadorURL.service.validator.RedirectValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -14,9 +15,11 @@ import java.util.Optional;
 public class LinkService {
 
     private final LinkRepository linkRepository;
+    private final List<RedirectValidator> redirectValidators;
 
-    public LinkService(LinkRepository linkRepository) {
+    public LinkService(LinkRepository linkRepository, List<RedirectValidator> redirectValidators) {
         this.linkRepository = linkRepository;
+        this.redirectValidators = redirectValidators;
     }
 
     @Transactional
@@ -35,6 +38,9 @@ public class LinkService {
     public void incrementViewsAndSave (Link link){
         link.incrementViews();
         linkRepository.save(link);
+    }
+    public void validateUrl (Link link) {
+        redirectValidators.forEach(v -> validateUrl(link));
     }
 
 
