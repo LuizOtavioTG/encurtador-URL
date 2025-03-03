@@ -11,7 +11,7 @@ import java.net.URLConnection;
 
 public class UrlHealthValidator implements RedirectValidator{
     @Override
-    public void validate(Link link) {
+    public void validator(Link link) {
         try {
             URI urlObj = new URI(link.getUrlLong());
             URLConnection conn = urlObj.toURL().openConnection();
